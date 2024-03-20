@@ -108,7 +108,7 @@ console.log(add(10, 5, "sub"))
 class Student {
 
     private skills: string[] = [];
-    constructor(public name: string, public rollNo: number) {
+    constructor(public name: string, public readonly rollNo: number) {
     }
 
     addSkill(skill: string) {
@@ -116,8 +116,120 @@ class Student {
     }
 }
 const student1 = new Student('Sabeh', 123);
+const student2 = new Student('Shaikh', 786);
 student1.addSkill("JavaScript")
-console.log(student1);
+student2.addSkill("Python")
+console.log(student1, student2);
+
+// Class 04 -- Getter and Setter
+// class Product {
+//     constructor(
+//         private id: number,
+//         private name: string,
+//         private price: number
+//     ) {
+//     }
+//     public getId(): number {
+//         return this.id;
+//     }
+//     public getName(): string {
+//         return this.name;
+//     }
+//     public getPrice(): number {
+//         return this.price;
+//     }
+
+// }
+// const product1 = new Product(1, "Cup", 200)
+// console.log(product1.getName());
 
 
+// Inheritance:
+// abstract class Product {
+//     constructor(
+//         private _id: number,
+//         private _name: string,
+//         private _price: number
+//     ) {
+//     }
+//     get id() {
+//         return this._id;
+//     }
+//     get name() {
+//         return this._name;
+//     }
 
+//     set name(newName: string) {
+//         if (!newName) {
+
+//             throw new Error("Name cannot be empty")
+//         }
+//         this._name = newName
+//     }
+
+//     get price() {
+//         return this._price;
+//     }
+
+//     abstract getDiscountRates(): number;
+// }
+
+// class ClothingProduct extends Product {
+//     constructor(
+//         _id: number,
+//         _name: string,
+//         _price: number,
+//         private _color: string,
+//         private _size: "S" | "M" | "L" | "XL"
+//     ) {
+//         super(_id, _name, _price);
+//     }
+//     getDiscountRates() {
+//         return this.price * 0.9
+//     }
+// }
+
+// class ElectronicsProducts extends Product {
+//     constructor(
+//         _id: number,
+//         _name: string,
+//         _price: number,
+//         private _brand: string,
+//         private _model: string
+//     ) {
+//         super(_id, _name, _price);
+//     }
+//     getDiscountRates() {
+//         return this.price * 0.5
+//     }
+// }
+
+// class Cart {
+//     private products: Product[] = []
+//     constructor(){}
+
+
+//     get totalPrice(){
+//         let price: number = 0;
+//       this.products
+//     }
+// }
+
+// const tShirt = new ClothingProduct(7, "Levis", 2500, "Red", "S");
+// console.log(tShirt);
+
+// STATIC Methods/Properties / Singletons:
+class Util {
+    private static instance: Util;
+    private constructor() {
+
+    }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new Util()
+        }
+        return this.instance;
+    }
+}
+const utlInst = Util.getInstance();
+const utlInst2 = Util.getInstance();
