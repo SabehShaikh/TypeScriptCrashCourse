@@ -12,7 +12,6 @@
 //     console.log(add(+firstVal, +secondVal));
 // });
 
-
 // Basic Types
 
 // 1. String: string => "Apple" , "Orange"
@@ -29,8 +28,6 @@
 // const arr2: number[] = [1, 2, 3];
 // arr2.push(4)
 // arr2.push("abc") // cannot push type string to number.
-
-
 
 // This is my new comment
 
@@ -71,18 +68,17 @@
 
 // Type Literals:
 
-type Calc = "add" | "sub" | "+" | "-"
+type Calc = "add" | "sub" | "+" | "-";
 const add = function (val1: number, val2: number, calc: Calc) {
-    if (calc === "add" || calc === "+") {
-        return val1 + val2;
-    }
-    else if (calc === "sub" || calc === "-") {
-        return val1 - val2
-    }
+  if (calc === "add" || calc === "+") {
+    return val1 + val2;
+  } else if (calc === "sub" || calc === "-") {
+    return val1 - val2;
+  }
 };
 
-console.log(add(10, 5, "add"))
-console.log(add(10, 5, "sub"))
+console.log(add(10, 5, "add"));
+console.log(add(10, 5, "sub"));
 
 // Tuples: --> fixed length array
 
@@ -106,19 +102,17 @@ console.log(add(10, 5, "sub"))
 // }
 // SHORT END
 class Student {
+  private skills: string[] = [];
+  constructor(public name: string, public readonly rollNo: number) {}
 
-    private skills: string[] = [];
-    constructor(public name: string, public readonly rollNo: number) {
-    }
-
-    addSkill(skill: string) {
-        this.skills.push(skill)
-    }
+  addSkill(skill: string) {
+    this.skills.push(skill);
+  }
 }
-const student1 = new Student('Sabeh', 123);
-const student2 = new Student('Shaikh', 786);
-student1.addSkill("JavaScript")
-student2.addSkill("Python")
+const student1 = new Student("Sabeh", 123);
+const student2 = new Student("Shaikh", 786);
+student1.addSkill("JavaScript");
+student2.addSkill("Python");
 console.log(student1, student2);
 
 // Class 04 -- Getter and Setter
@@ -142,7 +136,6 @@ console.log(student1, student2);
 // }
 // const product1 = new Product(1, "Cup", 200)
 // console.log(product1.getName());
-
 
 // Inheritance:
 // abstract class Product {
@@ -208,7 +201,6 @@ console.log(student1, student2);
 //     private products: Product[] = []
 //     constructor(){}
 
-
 //     get totalPrice(){
 //         let price: number = 0;
 //       this.products
@@ -220,16 +212,110 @@ console.log(student1, student2);
 
 // STATIC Methods/Properties / Singletons:
 class Util {
-    private static instance: Util;
-    private constructor() {
-
+  private static instance: Util;
+  private constructor() {}
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new Util();
     }
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new Util()
-        }
-        return this.instance;
-    }
+    return this.instance;
+  }
 }
 const utlInst = Util.getInstance();
 const utlInst2 = Util.getInstance();
+
+// CLASS 05 // union operators
+type Combine = string | number | boolean;
+let abc: Combine = "Apple";
+abc = 123;
+abc = true;
+
+// type Animal = {
+//   name: string;
+//   runningSpeed: number;
+// };
+
+// type Bird = {
+//   name: string;
+//   flyingSpeed: number;
+// };
+// type Creature = Animal | Bird; // Union Types
+
+// const tiger: Creature = {
+//     name: "Tiger",
+//     runningSpeed: 300,
+//   };
+
+// Intersection Types:
+// type Creature = Animal & Bird; // Intersection Types
+
+// const cockroach: Creature = {
+//   name: "Cockroach",
+//   runningSpeed: 100,
+//   flyingSpeed: 300,
+// };
+
+// Interfaces:
+// interface Animal {
+//   name: string;
+//   runningSpeed: number;
+// }
+
+// interface Bird {
+//   name: string;
+//   flyingSpeed: number;
+// }
+
+// interface Creature extends Animal, Bird {}
+
+// const tiger: Creature = {
+//   name: "Tiger",
+//   runningSpeed: 300,
+//   flyingSpeed: 10,
+// };
+
+// interface Animal {
+//   name: string;
+//   runningSpeed: number;
+//   eat(food: string): string;
+// }
+
+// class Tiger implements Animal {
+//   constructor(public name: string, public runningSpeed: number) {}
+
+//   eat(food: string) {
+//     return "Eating Food";
+//   }
+// }
+
+// const abc = new Tiger('ABC', 450);
+// console.log(abc.eat('Meat'));
+// console.log(abc);
+
+// Type Guards
+
+type Bird = {
+  name: string;
+  flyingSpeed: number;
+};
+
+type Animal = {
+  name: string;
+  runningSpeed: number;
+};
+
+type Creature = Animal | Bird;
+
+function log(creature: Creature) {
+  if ("runningSpeed" in creature) {
+    // Type Guards
+    console.log(creature.runningSpeed);
+  }
+
+  // console.log(creature.runningSpeed);
+}
+const sparrow: Creature = {
+  name: "Sparrow",
+  flyingSpeed: 150,
+};
+log(sparrow);

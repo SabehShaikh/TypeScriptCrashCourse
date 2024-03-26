@@ -38,8 +38,8 @@ class Student {
         this.skills.push(skill);
     }
 }
-const student1 = new Student('Sabeh', 123);
-const student2 = new Student('Shaikh', 786);
+const student1 = new Student("Sabeh", 123);
+const student2 = new Student("Shaikh", 786);
 student1.addSkill("JavaScript");
 student2.addSkill("Python");
 console.log(student1, student2);
@@ -128,8 +128,7 @@ console.log(student1, student2);
 // console.log(tShirt);
 // STATIC Methods/Properties / Singletons:
 class Util {
-    constructor() {
-    }
+    constructor() { }
     static getInstance() {
         if (!this.instance) {
             this.instance = new Util();
@@ -139,4 +138,19 @@ class Util {
 }
 const utlInst = Util.getInstance();
 const utlInst2 = Util.getInstance();
+let abc = "Apple";
+abc = 123;
+abc = true;
+function log(creature) {
+    if ("runningSpeed" in creature) {
+        // Type Guards
+        console.log(creature.runningSpeed);
+    }
+    // console.log(creature.runningSpeed);
+}
+const sparrow = {
+    name: "Sparrow",
+    flyingSpeed: 150,
+};
+log(sparrow);
 //# sourceMappingURL=app.js.map
