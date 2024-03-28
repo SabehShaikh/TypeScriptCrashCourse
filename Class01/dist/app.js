@@ -153,4 +153,46 @@ const sparrow = {
     flyingSpeed: 150,
 };
 log(sparrow);
+// Class 06:
+// Type Casting
+const input = document.getElementById("input1");
+// Another way
+const input1 = document.getElementById("input1");
+// Generics:
+// in function syntax:
+// const promiseFunc = (): Promise<string> => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("Task perfomed");
+//     });
+//   });
+// };
+// promiseFunc().then
+const promiseFunc = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("TASK DONE");
+    }, 2000);
+});
+promiseFunc.then((data) => {
+    console.log(data.split(" "));
+});
+const promise_Func = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({
+                name: "Ishaq",
+                id: 123
+            });
+        }, 2000);
+    });
+};
+promise_Func()
+    .then((data) => {
+    console.log(data.name);
+});
+function merge(objA, objB) {
+    return Object.assign(Object.assign({}, objA), objB);
+}
+const merged = merge({ name: 'sabeh' }, { id: 123 });
+console.log(merged.name);
 //# sourceMappingURL=app.js.map

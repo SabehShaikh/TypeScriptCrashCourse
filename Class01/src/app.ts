@@ -103,7 +103,7 @@ console.log(add(10, 5, "sub"));
 // SHORT END
 class Student {
   private skills: string[] = [];
-  constructor(public name: string, public readonly rollNo: number) {}
+  constructor(public name: string, public readonly rollNo: number) { }
 
   addSkill(skill: string) {
     this.skills.push(skill);
@@ -213,7 +213,7 @@ console.log(student1, student2);
 // STATIC Methods/Properties / Singletons:
 class Util {
   private static instance: Util;
-  private constructor() {}
+  private constructor() { }
   static getInstance() {
     if (!this.instance) {
       this.instance = new Util();
@@ -319,3 +319,57 @@ const sparrow: Creature = {
   flyingSpeed: 150,
 };
 log(sparrow);
+
+// Class 06:
+// Type Casting
+const input = document.getElementById("input1")! as HTMLInputElement;
+// Another way
+const input1 = <HTMLInputElement>document.getElementById("input1")!;
+
+// Generics:
+// in function syntax:
+// const promiseFunc = (): Promise<string> => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("Task perfomed");
+//     });
+//   });
+// };
+// promiseFunc().then
+
+const promiseFunc: Promise<string> = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("TASK DONE");
+  }, 2000);
+});
+
+promiseFunc.then((data) => {
+  console.log(data.split(" "));
+});
+
+type User = {
+  name: string;
+  id: number;
+};
+
+const promise_Func = (): Promise<User> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        name: "Ishaq",
+        id: 123
+      });
+    }, 2000);
+  });
+}
+
+promise_Func()
+  .then((data) => {
+    console.log(data.name);
+  });
+
+function merge<T, U>(objA: T, objB: U) {
+  return {...objA , ...objB}
+}
+const merged = merge({name: 'sabeh'} , {id: 123})
+console.log(merged.name);
