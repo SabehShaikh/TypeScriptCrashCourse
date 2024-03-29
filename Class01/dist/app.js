@@ -2,6 +2,12 @@
 // const input1 = document.getElementById("num1")! as HTMLInputElement;
 // const input2 = document.getElementById("num2")! as HTMLInputElement;
 // const button = document.getElementById("btn")!;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 const add = function (val1, val2, calc) {
     if (calc === "add" || calc === "+") {
         return val1 + val2;
@@ -181,18 +187,45 @@ const promise_Func = () => {
         setTimeout(() => {
             resolve({
                 name: "Ishaq",
-                id: 123
+                id: 123,
             });
         }, 2000);
     });
 };
-promise_Func()
-    .then((data) => {
+promise_Func().then((data) => {
     console.log(data.name);
 });
 function merge(objA, objB) {
     return Object.assign(Object.assign({}, objA), objB);
 }
-const merged = merge({ name: 'sabeh' }, { id: 123 });
+const merged = merge({ name: "sabeh" }, { id: 123 });
 console.log(merged.name);
+// Class 07:
+// Decorators
+function Looger(message) {
+    return function (constructor) {
+        console.log("LOGGING....");
+        console.log(message);
+    };
+}
+function FillHtml(template, elemId) {
+    return function (constructor) {
+        const elem = document.getElementById(elemId);
+        const p = new constructor();
+        if (elem) {
+            elem.innerHTML = template;
+            elem.querySelector("h1").innerText = p.name;
+        }
+    };
+}
+let Person = class Person {
+    constructor() {
+        this.name = "sabeh";
+    }
+};
+Person = __decorate([
+    Looger("Calling from Person") // argument passed
+    ,
+    FillHtml("<h1>Hello</h1>", "app")
+], Person);
 //# sourceMappingURL=app.js.map

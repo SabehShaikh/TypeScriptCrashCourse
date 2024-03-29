@@ -357,19 +357,48 @@ const promise_Func = (): Promise<User> => {
     setTimeout(() => {
       resolve({
         name: "Ishaq",
-        id: 123
+        id: 123,
       });
     }, 2000);
   });
-}
+};
 
-promise_Func()
-  .then((data) => {
-    console.log(data.name);
-  });
+promise_Func().then((data) => {
+  console.log(data.name);
+});
 
 function merge<T, U>(objA: T, objB: U) {
-  return {...objA , ...objB}
+  return { ...objA, ...objB };
 }
-const merged = merge({name: 'sabeh'} , {id: 123})
+const merged = merge({ name: "sabeh" }, { id: 123 });
 console.log(merged.name);
+
+// Class 07:
+// Decorators
+
+function Looger(message: string) {// Decorator Factory
+  return function (constructor: Function) {  // Actual decorator
+    console.log("LOGGING....");
+    console.log(message);
+  };
+}
+
+function FillHtml(template: string, elemId: string) { // Decorator Factory
+  return function (constructor: any) { // Actual decorator
+  
+    const elem = document.getElementById(elemId);
+    const p = new constructor();
+    if(elem) {
+      elem.innerHTML = template;
+      elem.querySelector("h1")!.innerText = p.name;
+    }
+  };
+}
+
+@Looger("Calling from Person") // argument passed
+@FillHtml("<h1>Hello</h1>", "app")
+class Person {
+  name = "sabeh";
+
+  constructor() { }
+}
