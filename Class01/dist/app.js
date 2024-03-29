@@ -228,4 +228,19 @@ Person = __decorate([
     ,
     FillHtml("<h1>Hello</h1>", "app")
 ], Person);
+function added(x, y) {
+    if (typeof x === 'number' && typeof y === 'number') {
+        return x + y;
+    }
+    else if (typeof x === 'string' && typeof y === 'string') {
+        return x + y;
+    }
+    else {
+        throw new Error('Types did not match');
+    }
+}
+const value = added('hello', 'World'); //  as string; // type casting
+const value2 = added(5, 5); // as number; // type casting
+console.log(value2.toFixed()); // number property working here.
+console.log(value.split(" ")); // string property working here.
 //# sourceMappingURL=app.js.map

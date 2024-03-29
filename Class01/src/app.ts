@@ -367,7 +367,7 @@ promise_Func().then((data) => {
   console.log(data.name);
 });
 
-function merge<T, U>(objA: T, objB: U) {
+function merge<T extends object, U extends object>(objA: T, objB: U) {
   return { ...objA, ...objB };
 }
 const merged = merge({ name: "sabeh" }, { id: 123 });
@@ -402,3 +402,29 @@ class Person {
 
   constructor() { }
 }
+
+// Function Overloading:
+// TypeScript allows you to define multiple function signatures for a single function name.
+// This is useful when you want different behavior based on the types or number of arguments provided.
+type Combined = string | number;
+
+function added(x: number , y: number): number // Number impl
+function added(x: string , y: string): string // String impl
+function added(x: Combined , y: Combined) {
+  if(typeof x === 'number' && typeof y === 'number' ) {
+
+    return x + y;
+  } 
+  else if(typeof x === 'string' && typeof y === 'string' ){
+    return x + y;
+  }
+  else {
+    throw new Error('Types did not match')
+  }
+}
+
+const value = added('hello' , 'World') //  as string; // type casting
+const value2 = added(5 , 5) // as number; // type casting
+console.log(value2.toFixed()); // number property working here.
+console.log(value.split(" ")); // string property working here.
+
